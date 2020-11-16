@@ -1,4 +1,5 @@
 import { AssertionError } from 'assert';
+import { ParseError } from '../src/error';
 import { Source } from '../src/source';
 import { multiline } from '../src/util/string';
 
@@ -8,10 +9,22 @@ test('Regular expression must be sticky', () => {
   expect(() => source.match(/a/y)).not.toThrowError();
 });
 
-test('Returns null if there is not a match', () => {
+test('Returns a ParseError if there is not a match', () => {
   const source = new Source('a', 0);
   const result = source.match(/b/y);
-  expect(result).toBe(null);
+  expect(result).toBeInstanceOf(ParseError);
+});
+
+test('ParseError should contain line and column', () => {
+  const source = new Source('a', 0, 1, 2);
+  const result = source.match(/b/y);
+  if (!(result instanceof ParseError)) {
+    expect(result).toBeInstanceOf(ParseError);
+    return;
+  }
+
+  expect(result.line).toBe(1);
+  expect(result.column).toBe(2);
 });
 
 test('Can match a simple string', () => {

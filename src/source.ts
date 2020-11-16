@@ -1,4 +1,5 @@
 import { AssertionError } from 'assert';
+import { ParseError } from './error';
 
 export class Source {
   constructor(
@@ -8,7 +9,10 @@ export class Source {
     public column: number = 1
   ) {}
 
-  match(regexp: RegExp): ParseResult<string> | null {
+  match(
+    regexp: RegExp,
+    message = 'Parse error'
+  ): ParseResult<string> | ParseError {
     if (!regexp.sticky) {
       throw new AssertionError({
         message:
@@ -33,7 +37,8 @@ export class Source {
       const source = new Source(this.source, newIndex, line, column);
       return new ParseResult(value, source, line, column);
     }
-    return null;
+
+    return new ParseError(message, this.line, this.column);
   }
 }
 
