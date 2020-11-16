@@ -1,5 +1,5 @@
 import { ParseError } from '../src/error';
-import { Source } from '../src/lib';
+import { Source } from '../src/source';
 import {
   constant,
   error,
@@ -7,6 +7,7 @@ import {
   oneOrMore,
   Parser,
   regexp,
+  text,
   zeroOrMore,
 } from '../src/parser';
 import { multiline } from '../src/util/string';
@@ -233,4 +234,13 @@ test('`parseStringToCompletion` should return column where error occurred', () =
     return;
   }
   expect(result.column).toBe(2);
+});
+
+test('`text` should parse a simple string', () => {
+  const result = text('abc').parse(new Source('abc', 0));
+  if (result instanceof ParseError) {
+    expect(result).not.toBeInstanceOf(ParseError);
+    return;
+  }
+  expect(result.value).toBe('abc');
 });

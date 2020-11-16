@@ -46,9 +46,9 @@ export class Parser<T> {
     const index = result.source.index;
     if (index !== result.source.source.length) {
       return new ParseError(
-        'Incomplete parse',
         result.source.line,
-        result.source.column
+        result.source.column,
+        'Incomplete parse'
       );
     }
 
@@ -62,7 +62,7 @@ export const constant = <T>(value: T): Parser<T> =>
   );
 
 export const error = <T>(message: string): Parser<T> =>
-  new Parser((source) => new ParseError(message, source.line, source.column));
+  new Parser((source) => new ParseError(source.line, source.column, message));
 
 export const maybe = <T>(parser: Parser<T | null>): Parser<T | null> =>
   parser.or(constant(null));
@@ -90,7 +90,7 @@ export const oneOrMore = <T>(
     const results = [];
     let item = parser.parse(source);
     if (item instanceof ParseError) {
-      return new ParseError(message || item.message, item.line, item.column);
+      return new ParseError(item.line, item.column, message || item.message);
     }
 
     source = item.source;
@@ -103,3 +103,6 @@ export const oneOrMore = <T>(
     }
     return new ParseResult(results, source, source.line, source.column);
   });
+
+export const text = (text: string, message?: string): Parser<string> =>
+  new Parser((source) => source.text(text, message));
