@@ -152,3 +152,9 @@ export const escapeSequence = regexp(/\\[bfnrtv0'"\\]/y).map((value) => {
       throw new Error(`Unhandled escape sequence: ${value}`);
   }
 });
+
+export const singleQuoteString = text("'").and(
+  zeroOrMore(escapeSequence.or(regexp(/\\'|[^']/y))).bind((values) =>
+    text("'").map(() => values.join(''))
+  )
+);

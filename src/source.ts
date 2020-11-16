@@ -12,7 +12,7 @@ export class Source {
   private getNewLineAndColumn(value: string) {
     let line = this.line;
     let column = this.column + value.length;
-    const lines = this.source.slice(this.index, value.length).match(/\n.*/g);
+    const lines = this.source.substr(this.index, value.length).match(/\n.*/g);
     if (lines) {
       line += lines.length;
       column = lines[lines.length - 1].length;
@@ -21,7 +21,7 @@ export class Source {
   }
 
   getRemaining() {
-    return this.source.slice(this.index);
+    return this.source.substr(this.index);
   }
 
   match(regexp: RegExp, message?: string): ParseResult<string> | ParseError {
@@ -49,12 +49,12 @@ export class Source {
       this.column,
       message,
       regexp.toString(),
-      this.source.slice(this.index, 10)
+      this.source.substr(this.index, 10)
     );
   }
 
   text(text: string, message?: string): ParseResult<string> | ParseError {
-    if (this.source.slice(this.index, text.length) === text) {
+    if (this.source.substr(this.index, text.length) === text) {
       const newIndex = this.index + text.length;
       const { line, column } = this.getNewLineAndColumn(text);
       const source = new Source(this.source, newIndex, line, column);
@@ -66,7 +66,7 @@ export class Source {
       this.column,
       message,
       text,
-      this.source.slice(this.index, text.length)
+      this.source.substr(this.index, text.length)
     );
   }
 }

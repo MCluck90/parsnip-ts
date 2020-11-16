@@ -12,6 +12,7 @@ import {
   oneOrMore,
   Parser,
   regexp,
+  singleQuoteString,
   text,
   token,
   whitespace,
@@ -355,5 +356,35 @@ describe('escapeSequence', () => {
     const result = oneOrMore(escapeSequence).parseStringToCompletion(input);
     assertSuccessfulParse(result);
     expect(result.join('')).toBe('\b\f\n\r\t\v\0\'"\\');
+  });
+});
+
+describe('singleQuoteString', () => {
+  test('matches an empty string', () => {
+    const input = "''";
+    const result = singleQuoteString.parseStringToCompletion(input);
+    assertSuccessfulParse(result);
+    expect(result).toBe('');
+  });
+
+  test('match a string', () => {
+    const input = "'abc'";
+    const result = singleQuoteString.parseStringToCompletion(input);
+    assertSuccessfulParse(result);
+    expect(result).toBe('abc');
+  });
+
+  test('match a string with an escape sequence', () => {
+    const input = "'a\\nbc'";
+    const result = singleQuoteString.parseStringToCompletion(input);
+    assertSuccessfulParse(result);
+    expect(result).toBe('a\nbc');
+  });
+
+  test('match a string with an escape single quote', () => {
+    const input = "'a\\'bc'";
+    const result = singleQuoteString.parseStringToCompletion(input);
+    assertSuccessfulParse(result);
+    expect(result).toBe("a'bc");
   });
 });
