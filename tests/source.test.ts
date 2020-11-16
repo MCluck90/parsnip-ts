@@ -1,5 +1,5 @@
 import { AssertionError } from 'assert';
-import { Source } from '../src/lib';
+import { Source } from '../src/source';
 import { multiline } from '../src/util/string';
 
 test('Regular expression must be sticky', () => {

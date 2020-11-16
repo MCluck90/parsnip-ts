@@ -1,6 +1,6 @@
 export const multiline = (
   strings: string | TemplateStringsArray,
-  ...values: string[]
+  ...values: { toString(): string }[]
 ) => {
   const raw = typeof strings === 'string' ? [strings] : strings.raw;
 
