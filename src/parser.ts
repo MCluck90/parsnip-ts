@@ -48,7 +48,9 @@ export class Parser<T> {
       return new ParseError(
         result.source.line,
         result.source.column,
-        'Incomplete parse'
+        'Incomplete parse',
+        'end of input',
+        result.source.getRemaining()
       );
     }
 
@@ -106,3 +108,20 @@ export const oneOrMore = <T>(
 
 export const text = (text: string, message?: string): Parser<string> =>
   new Parser((source) => source.text(text, message));
+
+export const whitespace = regexp(/\s+/y);
+
+export const comments = regexp(/[/][/].*/y).or(regexp(/[/][*].*[*][/]/sy));
+
+export const ignored = zeroOrMore(whitespace.or(comments));
+
+export const token = (pattern: RegExp) =>
+  regexp(pattern).bind((value) => ignored.and(constant(value)));
+
+export const integer = token(/0|[1-9][0-9_]+/y).map((digits) =>
+  parseInt(digits.replace(/_/g, ''))
+);
+
+export const boolean = token(/true\b|false\b/y).map((bool) =>
+  bool === 'true' ? true : false
+);

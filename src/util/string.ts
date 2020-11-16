@@ -8,6 +8,9 @@ export const multiline = (
   let result = '';
   for (let i = 0; i < raw.length; i++) {
     result += raw[i]
+      .replace(/\\([nrt])/g, (_, match) =>
+        match === 'n' ? '\n' : match === 'r' ? '\r' : '\t'
+      )
       // Handle escaped backticks
       .replace(/\\`/g, '`');
 

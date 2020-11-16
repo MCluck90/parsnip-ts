@@ -20,6 +20,10 @@ export class Source {
     return { line, column };
   }
 
+  getRemaining() {
+    return this.source.slice(this.index);
+  }
+
   match(regexp: RegExp, message?: string): ParseResult<string> | ParseError {
     if (!regexp.sticky) {
       throw new AssertionError({
