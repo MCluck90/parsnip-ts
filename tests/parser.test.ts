@@ -5,6 +5,7 @@ import {
   comments,
   constant,
   error,
+  escapeSequence,
   ignored,
   integer,
   maybe,
@@ -345,5 +346,14 @@ describe('boolean', () => {
     const result = boolean.parseStringToCompletion('false');
     assertSuccessfulParse(result);
     expect(result).toBe(false);
+  });
+});
+
+describe('escapeSequence', () => {
+  test('matches a series of escape sequences', () => {
+    const input = '\\b\\f\\n\\r\\t\\v\\0\\\'\\"\\\\';
+    const result = oneOrMore(escapeSequence).parseStringToCompletion(input);
+    assertSuccessfulParse(result);
+    expect(result.join('')).toBe('\b\f\n\r\t\v\0\'"\\');
   });
 });
