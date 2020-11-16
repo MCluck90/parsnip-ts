@@ -103,7 +103,7 @@ test('Column should include relevant whitespace', () => {
       line2
   `;
   const source = new Source(sourceString, 0);
-  const result = source.match(/line1\n  line2/y);
+  const result = source.match(/line1\n {2}line2/y);
   if (result === null) {
     expect(result).not.toBe(null);
     return;

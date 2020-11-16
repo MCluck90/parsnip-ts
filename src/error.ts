@@ -1,5 +1,3 @@
-import { multiline } from './util/string';
-
 export class ParseError extends Error {
   public line: number;
   public column: number;

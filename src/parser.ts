@@ -12,7 +12,7 @@ export class Parser<T> {
     return this.bind(() => parser);
   }
 
-  bind<U>(map: (value: T) => Parser<U>, message?: string): Parser<U> {
+  bind<U>(map: (value: T) => Parser<U>): Parser<U> {
     return new Parser((source) => {
       const result = this.parse(source);
       if (result instanceof ParseError) {
