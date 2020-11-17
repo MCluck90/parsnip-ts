@@ -109,6 +109,15 @@ export const oneOrMore = <T>(
 export const text = (text: string, message?: string): Parser<string> =>
   new Parser((source) => source.text(text, message));
 
+export const not = <T>(parser: Parser<T>, message?: string): Parser<null> =>
+  new Parser((source) => {
+    const result = parser.parse(source);
+    if (!(result instanceof ParseError)) {
+      return new ParseError(source.line, source.column, message);
+    }
+    return new ParseResult(null, source, source.line, source.column);
+  });
+
 export const whitespace = regexp(/\s+/y);
 
 export const comments = regexp(/[/][/].*/y).or(regexp(/[/][*].*[*][/]/sy));

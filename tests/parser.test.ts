@@ -9,6 +9,7 @@ import {
   ignored,
   integer,
   maybe,
+  not,
   oneOrMore,
   Parser,
   regexp,
@@ -219,6 +220,18 @@ describe('text', () => {
     assertSuccessfulParse(result);
     expect(result.value).toBe('abc');
     expect(result.source.getRemaining()).toBe('def');
+  });
+});
+
+describe('not', () => {
+  test('should succeed when a parser fails', () => {
+    const result = not(text('a')).parse(new Source('b', 0));
+    assertSuccessfulParse(result);
+  });
+
+  test('should fail when a parser succeeds', () => {
+    const result = not(text('a')).parse(new Source('a', 0));
+    assertUnsuccessfulParse(result);
   });
 });
 
