@@ -22,6 +22,10 @@ export class Parser<T> {
     });
   }
 
+  concat(parser: Parser<string>): Parser<string> {
+    return this.bind((value) => parser.map((other) => value + other));
+  }
+
   map<U>(map: (t: T) => U): Parser<U> {
     return this.bind((value) => constant(map(value)));
   }
@@ -68,6 +72,11 @@ export const error = <T>(message: string): Parser<T> =>
 
 export const maybe = <T>(parser: Parser<T | null>): Parser<T | null> =>
   parser.or(constant(null));
+
+export const maybeWithDefault = <T>(
+  parser: Parser<T>,
+  defaultValue: T
+): Parser<T> => parser.or(constant(defaultValue));
 
 export const regexp = (regexp: RegExp, message?: string): Parser<string> =>
   new Parser((source) => source.match(regexp, message));
@@ -117,6 +126,46 @@ export const not = <T>(parser: Parser<T>, message?: string): Parser<null> =>
     }
     return new ParseResult(null, source, source.line, source.column);
   });
+
+export const repeat = <T>(
+  parser: Parser<T>,
+  count: number,
+  message?: string
+): Parser<T[]> =>
+  new Parser((source) => {
+    let result = parser.parse(source);
+    if (result instanceof ParseError) {
+      return new ParseError(
+        source.line,
+        source.column,
+        message || result.message
+      );
+    }
+
+    source = result.source;
+    const values: T[] = [];
+    for (let i = 1; i < count; i++) {
+      result = parser.parse(source);
+      if (result instanceof ParseError) {
+        return new ParseError(
+          source.line,
+          source.column,
+          message || result.message
+        );
+      }
+      source = result.source;
+      values.push(result.value);
+    }
+    return new ParseResult(values, source, source.line, source.column);
+  });
+
+export const lazy = <T>(getParser: () => Parser<T>): Parser<T> =>
+  new Parser((source) => getParser().parse(source));
+
+export const join = (
+  parser: Parser<string[]>,
+  separator = ''
+): Parser<string> => parser.map((elements) => elements.join(separator));
 
 export const whitespace = regexp(/\s+/y);
 

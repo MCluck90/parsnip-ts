@@ -8,11 +8,15 @@ import {
   escapeSequence,
   ignored,
   integer,
+  join,
+  lazy,
   maybe,
+  maybeWithDefault,
   not,
   oneOrMore,
   Parser,
   regexp,
+  repeat,
   singleQuoteString,
   text,
   token,
@@ -63,6 +67,26 @@ describe('maybe', () => {
     const result = maybe(new Parser((source) => source.match(/a/y))).parse(
       new Source('abc', 0)
     );
+    assertSuccessfulParse(result);
+    expect(result.value).toBe('a');
+  });
+});
+
+describe('maybeWithDefault', () => {
+  test('should return the default value if a pattern does not match', () => {
+    const result = maybeWithDefault(
+      new Parser((source) => source.match(/a/y)),
+      'x'
+    ).parse(new Source('', 0));
+    assertSuccessfulParse(result);
+    expect(result.value).toBe('x');
+  });
+
+  test('should return the result if a pattern does match', () => {
+    const result = maybeWithDefault(
+      new Parser((source) => source.match(/a/y)),
+      'x'
+    ).parse(new Source('abc', 0));
     assertSuccessfulParse(result);
     expect(result.value).toBe('a');
   });
@@ -150,6 +174,19 @@ describe('bind', () => {
   });
 });
 
+describe('concat', () => {
+  test('should concatenate two string parsers', () => {
+    const result = text('a').concat(text('b')).parseStringToCompletion('ab');
+    assertSuccessfulParse(result);
+    expect(result).toBe('ab');
+  });
+
+  test('should fail if the parser fails', () => {
+    const result = text('a').concat(text('c')).parseStringToCompletion('ab');
+    assertUnsuccessfulParse(result);
+  });
+});
+
 describe('map', () => {
   test('should allow mapping the result to some other value', () => {
     const parser = regexp(/a+/y).map((listOfAs) => listOfAs.length);
@@ -232,6 +269,31 @@ describe('not', () => {
   test('should fail when a parser succeeds', () => {
     const result = not(text('a')).parse(new Source('a', 0));
     assertUnsuccessfulParse(result);
+  });
+});
+
+describe('repeat', () => {
+  test('should repeat a parser a set number of times', () => {
+    const result = repeat(text('a'), 4).parseStringToCompletion('aaaa');
+    assertSuccessfulParse(result);
+  });
+});
+
+describe('lazy', () => {
+  test('should execute a parser lazily', () => {
+    let innerParser: Parser<string> = error('Failed');
+    const parser = lazy(() => innerParser);
+    innerParser = text('a');
+    const result = parser.parseStringToCompletion('a');
+    assertSuccessfulParse(result);
+  });
+});
+
+describe('join', () => {
+  test('should join the strings from a parser which returns a string array', () => {
+    const result = join(oneOrMore(text('a'))).parseStringToCompletion('aaaa');
+    assertSuccessfulParse(result);
+    expect(result).toBe('aaaa');
   });
 });
 
