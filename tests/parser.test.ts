@@ -1,7 +1,6 @@
 import { ParseError } from '../src/error';
 import { Source } from '../src/source';
 import {
-  boolean,
   constant,
   error,
   escapeSequence,
@@ -302,20 +301,6 @@ describe('list', () => {
     const result = parser.parseStringToCompletion(input);
     assertSuccessfulParse(result);
     expect(result).toEqual(['abc', 'abc', 'abc']);
-  });
-});
-
-describe('boolean', () => {
-  test('matches true', () => {
-    const result = boolean.parseStringToCompletion('true');
-    assertSuccessfulParse(result);
-    expect(result).toBe(true);
-  });
-
-  test('matches false', () => {
-    const result = boolean.parseStringToCompletion('false');
-    assertSuccessfulParse(result);
-    expect(result).toBe(false);
   });
 });
 

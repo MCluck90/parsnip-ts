@@ -190,10 +190,6 @@ export const list = <T, U>(
     ])
   );
 
-export const boolean = regexp(/true\b|false\b/y).map((bool) =>
-  bool === 'true' ? true : false
-);
-
 export const escapeSequence = regexp(/\\[bfnrtv0'"\\]/y).map((value) => {
   switch (value) {
     case '\\b':
