@@ -7,6 +7,7 @@ import {
   escapeSequence,
   join,
   lazy,
+  list,
   maybe,
   maybeWithDefault,
   not,
@@ -276,6 +277,31 @@ describe('join', () => {
     const result = join(oneOrMore(text('a'))).parseStringToCompletion('aaaa');
     assertSuccessfulParse(result);
     expect(result).toBe('aaaa');
+  });
+});
+
+describe('list', () => {
+  test('matches a list with a single element', () => {
+    const result = list(text('a'), text(',')).parseStringToCompletion('a');
+    assertSuccessfulParse(result);
+    expect(result).toEqual(['a']);
+  });
+
+  test('matches a list with multiple elements', () => {
+    const result = list(text('a'), text(',')).parseStringToCompletion(
+      'a,a,a,a,a'
+    );
+    assertSuccessfulParse(result);
+    expect(result).toEqual(['a', 'a', 'a', 'a', 'a']);
+  });
+
+  test('can use an arbitrary separator', () => {
+    const separator = text('#START#').and(regexp(/\d{3}/y)).and(text('#END#'));
+    const parser = list(text('abc'), separator);
+    const input = 'abc#START#123#END#abc#START#456#END#abc';
+    const result = parser.parseStringToCompletion(input);
+    assertSuccessfulParse(result);
+    expect(result).toEqual(['abc', 'abc', 'abc']);
   });
 });
 

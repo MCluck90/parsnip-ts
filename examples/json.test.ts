@@ -7,6 +7,7 @@ import {
   error,
   join,
   lazy,
+  list,
   Parser,
   regexp,
   repeat,
@@ -45,9 +46,7 @@ const string = text('"').and(
 let elementDefinition: Parser<Json> = error('Used before defined');
 const element = lazy(() => elementDefinition);
 
-const elements = element.bind((firstElem) =>
-  zeroOrMore(text(',').and(element)).map((elems) => [firstElem, ...elems])
-);
+const elements = list(element, text(','));
 
 const array = text('[')
   .and(elements.or(ws.map(() => [] as Json[])))
@@ -57,9 +56,7 @@ const member: Parser<[string, Json]> = ws
   .and(string)
   .bind((key) => ws.and(text(':')).and(element.map((value) => [key, value])));
 
-const members = member.bind((first) =>
-  zeroOrMore(text(',').and(member)).map((others) => [first, ...others])
-);
+const members = list(member, text(','));
 
 const object = text('{').and(
   members.or(ws.map(() => [] as [string, Json][])).bind((mems) =>

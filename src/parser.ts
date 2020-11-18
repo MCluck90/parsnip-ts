@@ -179,6 +179,17 @@ export const join = (
   separator = ''
 ): Parser<string> => parser.map((elements) => elements.join(separator));
 
+export const list = <T, U>(
+  elementParser: Parser<T>,
+  separatorParser: Parser<U>
+): Parser<T[]> =>
+  elementParser.bind((first) =>
+    zeroOrMore(separatorParser.and(elementParser)).map((rest) => [
+      first,
+      ...rest,
+    ])
+  );
+
 export const boolean = regexp(/true\b|false\b/y).map((bool) =>
   bool === 'true' ? true : false
 );
