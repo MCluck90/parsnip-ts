@@ -37,3 +37,7 @@ export const multiline = (
 
   return result.trim();
 };
+
+export function escapeRegExp(input: string) {
+  return input.replace(/[.*+?^${}()|/[\]\\]/g, '\\$&'); // $& means the whole matched string
+}

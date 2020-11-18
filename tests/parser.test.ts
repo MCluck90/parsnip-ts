@@ -2,11 +2,9 @@ import { ParseError } from '../src/error';
 import { Source } from '../src/source';
 import {
   boolean,
-  comments,
   constant,
   error,
   escapeSequence,
-  ignored,
   integer,
   join,
   lazy,
@@ -19,26 +17,10 @@ import {
   repeat,
   singleQuoteString,
   text,
-  token,
-  whitespace,
-  ws,
   zeroOrMore,
 } from '../src/parser';
 import { multiline } from '../src/util/string';
-
-function assertSuccessfulParse<T>(result: ParseError | T): asserts result is T {
-  if (result instanceof ParseError) {
-    throw result;
-  }
-}
-
-function assertUnsuccessfulParse<T>(
-  result: T | ParseError
-): asserts result is ParseError {
-  if (!(result instanceof ParseError)) {
-    expect(result).toBeInstanceOf(ParseError);
-  }
-}
+import { assertSuccessfulParse, assertUnsuccessfulParse } from './util';
 
 describe('constant', () => {
   test('should return a constant value', () => {
@@ -295,116 +277,6 @@ describe('join', () => {
     const result = join(oneOrMore(text('a'))).parseStringToCompletion('aaaa');
     assertSuccessfulParse(result);
     expect(result).toBe('aaaa');
-  });
-});
-
-describe('whitespace', () => {
-  test('matches whitespace', () => {
-    const input = ' \r\n\t';
-    const result = whitespace.parseStringToCompletion(input);
-    assertSuccessfulParse(result);
-    expect(result).toBe(input);
-  });
-
-  test('requires at least one whitespace character', () => {
-    const input = '';
-    const result = whitespace.parseStringToCompletion(input);
-    assertUnsuccessfulParse(result);
-  });
-});
-
-describe('ws', () => {
-  test('matches whitespace', () => {
-    const input = ' \r\n\t';
-    const result = ws.parseStringToCompletion(input);
-    assertSuccessfulParse(result);
-    expect(result).toBe(input);
-  });
-
-  test('matches zero or more whitespace', () => {
-    const input = '';
-    const result = ws.parseStringToCompletion(input);
-    assertSuccessfulParse(result);
-  });
-});
-
-describe('comments', () => {
-  test('matches single line comments', () => {
-    const input = multiline`
-      // comment
-      not a comment
-    `;
-    const result = comments.parse(new Source(input, 0));
-    assertSuccessfulParse(result);
-    expect(result.value.trim()).toBe('// comment');
-    expect(result.source.getRemaining().trim()).toBe('not a comment');
-  });
-
-  test('matches multi line comments', () => {
-    const input = multiline`
-      /*
-      comment
-      */
-      not a comment
-    `;
-    const result = comments.parse(new Source(input, 0));
-    assertSuccessfulParse(result);
-    expect(result.value).toBe('/*\ncomment\n*/');
-    expect(result.source.getRemaining().trim()).toBe('not a comment');
-  });
-});
-
-describe('ignored', () => {
-  test('captures whitespace', () => {
-    const input = ' \r\n\t';
-    const result = ignored.parse(new Source(input, 0));
-    assertSuccessfulParse(result);
-    expect(result.value).toEqual([input]);
-  });
-
-  test('captures comments', () => {
-    const input = '// comment';
-    const result = ignored.parse(new Source(input, 0));
-    assertSuccessfulParse(result);
-    expect(result.value).toEqual([input]);
-  });
-
-  test('captures whitespace and comments', () => {
-    const input = multiline`
-      // single
-      /*
-      multi
-      */
-     \r\t
-     /* multi *///single
-    `;
-    const result = ignored.parseStringToCompletion(input);
-    assertSuccessfulParse(result);
-    expect(result.join('')).toBe(input);
-  });
-});
-
-describe('token', () => {
-  test('matches a regular expression', () => {
-    const input = 'token';
-    const result = token(/token/y).parseStringToCompletion(input);
-    assertSuccessfulParse(result);
-    expect(result).toBe(input);
-  });
-
-  test('strips out ignored text after pattern', () => {
-    const input = multiline`
-      token // comment
-
-      \t
-      /*
-      multi
-      line
-      */
-    `;
-    const result = token(/token/y).parseStringToCompletion(input);
-    assertSuccessfulParse(result);
-    expect(result).toBe('token');
   });
 });
 

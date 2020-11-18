@@ -167,22 +167,11 @@ export const join = (
   separator = ''
 ): Parser<string> => parser.map((elements) => elements.join(separator));
 
-export const whitespace = regexp(/\s+/y);
-
-export const ws = regexp(/\s*/y);
-
-export const comments = regexp(/[/][/].*/y).or(regexp(/[/][*].*[*][/]/sy));
-
-export const ignored = zeroOrMore(whitespace.or(comments));
-
-export const token = (pattern: RegExp) =>
-  regexp(pattern).bind((value) => ignored.and(constant(value)));
-
-export const integer = token(/0|[1-9][0-9_]+/y).map((digits) =>
+export const integer = regexp(/0|[1-9][0-9_]+/y).map((digits) =>
   parseInt(digits.replace(/_/g, ''))
 );
 
-export const boolean = token(/true\b|false\b/y).map((bool) =>
+export const boolean = regexp(/true\b|false\b/y).map((bool) =>
   bool === 'true' ? true : false
 );
 
