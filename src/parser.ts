@@ -167,10 +167,6 @@ export const join = (
   separator = ''
 ): Parser<string> => parser.map((elements) => elements.join(separator));
 
-export const integer = regexp(/0|[1-9][0-9_]+/y).map((digits) =>
-  parseInt(digits.replace(/_/g, ''))
-);
-
 export const boolean = regexp(/true\b|false\b/y).map((bool) =>
   bool === 'true' ? true : false
 );

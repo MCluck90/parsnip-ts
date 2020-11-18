@@ -5,7 +5,6 @@ import {
   constant,
   error,
   escapeSequence,
-  integer,
   join,
   lazy,
   maybe,
@@ -277,31 +276,6 @@ describe('join', () => {
     const result = join(oneOrMore(text('a'))).parseStringToCompletion('aaaa');
     assertSuccessfulParse(result);
     expect(result).toBe('aaaa');
-  });
-});
-
-describe('integer', () => {
-  test('matches a zero', () => {
-    const result = integer.parseStringToCompletion('0');
-    assertSuccessfulParse(result);
-    expect(result).toBe(0);
-  });
-
-  test('does not match numbers starting with a zero', () => {
-    const result = integer.parseStringToCompletion('0123');
-    assertUnsuccessfulParse(result);
-  });
-
-  test('matches numbers other than zero', () => {
-    const result = integer.parseStringToCompletion('1234567890');
-    assertSuccessfulParse(result);
-    expect(result).toBe(1234567890);
-  });
-
-  test('allow underscore separators', () => {
-    const result = integer.parseStringToCompletion('1_234_567_890');
-    assertSuccessfulParse(result);
-    expect(result).toBe(1234567890);
   });
 });
 
