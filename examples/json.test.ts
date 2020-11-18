@@ -42,13 +42,11 @@ const string = text('"').and(
 );
 
 // Must be defined after other rules. Use `lazy` to include it in rules before it's defined
-let element: Parser<Json> = error('Used before defined');
+let elementDefinition: Parser<Json> = error('Used before defined');
+const element = lazy(() => elementDefinition);
 
-const elements = lazy(() => element).bind((firstElem) =>
-  zeroOrMore(text(',').and(lazy(() => element))).map((elems) => [
-    firstElem,
-    ...elems,
-  ])
+const elements = element.bind((firstElem) =>
+  zeroOrMore(text(',').and(element)).map((elems) => [firstElem, ...elems])
 );
 
 const array = text('[')
@@ -57,9 +55,7 @@ const array = text('[')
 
 const member: Parser<[string, Json]> = ws
   .and(string)
-  .bind((key) =>
-    ws.and(text(':')).and(lazy(() => element).map((value) => [key, value]))
-  );
+  .bind((key) => ws.and(text(':')).and(element.map((value) => [key, value])));
 
 const members = member.bind((first) =>
   zeroOrMore(text(',').and(member)).map((others) => [first, ...others])
@@ -84,7 +80,7 @@ const value = object
   .or(text('false').and(constant(false)))
   .or(text('null').and(constant(null)));
 
-element = ws.and(value.bind((val) => ws.map(() => val)));
+elementDefinition = ws.and(value.bind((val) => ws.map(() => val)));
 
 const json: Parser<Json> = element;
 
