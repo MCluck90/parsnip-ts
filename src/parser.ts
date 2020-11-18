@@ -169,6 +169,8 @@ export const join = (
 
 export const whitespace = regexp(/\s+/y);
 
+export const ws = regexp(/\s*/y);
+
 export const comments = regexp(/[/][/].*/y).or(regexp(/[/][*].*[*][/]/sy));
 
 export const ignored = zeroOrMore(whitespace.or(comments));

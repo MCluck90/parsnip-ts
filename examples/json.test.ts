@@ -19,9 +19,7 @@ interface JsonObject {
 }
 type Json = null | boolean | number | string | Json[] | JsonObject;
 
-const ws = zeroOrMore(regexp(/\u0020|\u000A|\u000D|\u0009/y)).map((chars) =>
-  chars.join('')
-);
+const ws = regexp(/[\u0020|\u000A|\u000D|\u0009]*/y);
 
 const sign = regexp(/[+-]?/y);
 
