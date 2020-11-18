@@ -3,7 +3,6 @@ import { Source } from '../src/source';
 import {
   constant,
   error,
-  escapeSequence,
   join,
   lazy,
   list,
@@ -14,7 +13,6 @@ import {
   Parser,
   regexp,
   repeat,
-  singleQuoteString,
   text,
   zeroOrMore,
 } from '../src/parser';
@@ -301,44 +299,5 @@ describe('list', () => {
     const result = parser.parseStringToCompletion(input);
     assertSuccessfulParse(result);
     expect(result).toEqual(['abc', 'abc', 'abc']);
-  });
-});
-
-describe('escapeSequence', () => {
-  test('matches a series of escape sequences', () => {
-    const input = '\\b\\f\\n\\r\\t\\v\\0\\\'\\"\\\\';
-    const result = oneOrMore(escapeSequence).parseStringToCompletion(input);
-    assertSuccessfulParse(result);
-    expect(result.join('')).toBe('\b\f\n\r\t\v\0\'"\\');
-  });
-});
-
-describe('singleQuoteString', () => {
-  test('matches an empty string', () => {
-    const input = "''";
-    const result = singleQuoteString.parseStringToCompletion(input);
-    assertSuccessfulParse(result);
-    expect(result).toBe('');
-  });
-
-  test('match a string', () => {
-    const input = "'abc'";
-    const result = singleQuoteString.parseStringToCompletion(input);
-    assertSuccessfulParse(result);
-    expect(result).toBe('abc');
-  });
-
-  test('match a string with an escape sequence', () => {
-    const input = "'a\\nbc'";
-    const result = singleQuoteString.parseStringToCompletion(input);
-    assertSuccessfulParse(result);
-    expect(result).toBe('a\nbc');
-  });
-
-  test('match a string with an escape single quote', () => {
-    const input = "'a\\'bc'";
-    const result = singleQuoteString.parseStringToCompletion(input);
-    assertSuccessfulParse(result);
-    expect(result).toBe("a'bc");
   });
 });
