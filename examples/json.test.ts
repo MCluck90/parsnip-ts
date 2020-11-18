@@ -1,12 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 import { ParseError } from '../src/error';
+import { signedFloatingPoint, signedInteger } from '../src/numbers';
 import {
   constant,
   error,
   join,
   lazy,
-  maybeWithDefault,
   Parser,
   regexp,
   repeat,
@@ -21,31 +21,9 @@ type Json = null | boolean | number | string | Json[] | JsonObject;
 
 const ws = regexp(/[\u0020|\u000A|\u000D|\u0009]*/y);
 
-const sign = regexp(/[+-]?/y);
+const number = signedFloatingPoint.or(signedInteger);
 
-const onenine = regexp(/[1-9]/y);
-
-const zero = text('0');
-
-const digit = zero.or(onenine);
-
-const digits = zeroOrMore(digit);
-
-const exponent = maybeWithDefault(
-  regexp(/[eE]/y).concat(sign).concat(join(digits)),
-  ''
-);
-
-const fraction = text('.').concat(join(digits)).or(text(''));
-
-const integer = zero
-  .or(onenine.concat(join(digits)))
-  .or(text('-').concat(zero))
-  .or(text('-').concat(onenine).concat(join(digits)));
-
-const number = integer.concat(fraction).concat(exponent).map(Number);
-
-const hex = digit.or(regexp(/[a-fA-F]/y));
+const hex = regexp(/[0-9a-fA-F]/y);
 
 const escape = regexp(/["\\/bfnrt]/y).or(
   text('u')

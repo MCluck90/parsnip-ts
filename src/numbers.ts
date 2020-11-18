@@ -1,10 +1,10 @@
 import { maybeWithDefault, regexp, text } from './parser';
 
-export const sign = regexp(/[+-]/y);
+export const sign = regexp(/[+-]/y, '+ or -');
 
-export const digit = regexp(/\d/y);
+export const digit = regexp(/\d/y, 'a digit');
 
-export const integer = regexp(/0|[1-9][0-9]*/y).map(Number);
+export const integer = regexp(/0|[1-9][0-9]*/y, 'an integer').map(Number);
 
 export const signedInteger = maybeWithDefault(sign, '')
   .concat(integer)
