@@ -8,8 +8,26 @@ import {
   separatedFloatingPoint,
   separatedInteger,
   sign,
+  signedFloatingPoint,
+  signedInteger,
+  signedSeparatedFloatingPoint,
+  signedSeparatedInteger,
 } from '../src/numbers';
 import { assertSuccessfulParse, assertUnsuccessfulParse } from './util';
+
+describe('sign', () => {
+  test('matches a negative sign', () => {
+    const result = sign.parseStringToCompletion('-');
+    assertSuccessfulParse(result);
+    expect(result).toBe('-');
+  });
+
+  test('matches a positive sign', () => {
+    const result = sign.parseStringToCompletion('+');
+    assertSuccessfulParse(result);
+    expect(result).toBe('+');
+  });
+});
 
 describe('digit', () => {
   test('matches any digit', () => {
@@ -38,6 +56,26 @@ describe('integer', () => {
   });
 });
 
+describe('signedInteger', () => {
+  test('matches a negative integer', () => {
+    const result = signedInteger.parseStringToCompletion('-123');
+    assertSuccessfulParse(result);
+    expect(result).toBe(-123);
+  });
+
+  test('matches a positive integer', () => {
+    const result = signedInteger.parseStringToCompletion('+123');
+    assertSuccessfulParse(result);
+    expect(result).toBe(123);
+  });
+
+  test('matches an integer without a sign', () => {
+    const result = signedInteger.parseStringToCompletion('123');
+    assertSuccessfulParse(result);
+    expect(result).toBe(123);
+  });
+});
+
 describe('separatedInteger', () => {
   test('allow underscore separators', () => {
     const result = separatedInteger.parseStringToCompletion('1_234_567_890');
@@ -46,17 +84,23 @@ describe('separatedInteger', () => {
   });
 });
 
-describe('sign', () => {
-  test('matches a negative sign', () => {
-    const result = sign.parseStringToCompletion('-');
+describe('signedSeparatedInteger', () => {
+  test('matches a negative integer', () => {
+    const result = signedSeparatedInteger.parseStringToCompletion('-1_234');
     assertSuccessfulParse(result);
-    expect(result).toBe('-');
+    expect(result).toBe(-1234);
   });
 
-  test('matches a positive sign', () => {
-    const result = sign.parseStringToCompletion('+');
+  test('matches a positive integer', () => {
+    const result = signedSeparatedInteger.parseStringToCompletion('+1_234');
     assertSuccessfulParse(result);
-    expect(result).toBe('+');
+    expect(result).toBe(1234);
+  });
+
+  test('matches an integer without a sign', () => {
+    const result = signedSeparatedInteger.parseStringToCompletion('1_234');
+    assertSuccessfulParse(result);
+    expect(result).toBe(1234);
   });
 });
 
@@ -107,6 +151,26 @@ describe('floatingPoint', () => {
   });
 });
 
+describe('signedFloatingPoint', () => {
+  test('matches a positive floating point', () => {
+    const result = signedFloatingPoint.parseStringToCompletion('+1.23e45');
+    assertSuccessfulParse(result);
+    expect(result).toBe(1.23e45);
+  });
+
+  test('matches a negative floating point', () => {
+    const result = signedFloatingPoint.parseStringToCompletion('-1.23e45');
+    assertSuccessfulParse(result);
+    expect(result).toBe(-1.23e45);
+  });
+
+  test('matches a floating point without a sign', () => {
+    const result = signedFloatingPoint.parseStringToCompletion('1.23e45');
+    assertSuccessfulParse(result);
+    expect(result).toBe(1.23e45);
+  });
+});
+
 describe('separatedFloatingPoint', () => {
   test('matches a simple floating point', () => {
     const result = separatedFloatingPoint.parseStringToCompletion('1.');
@@ -130,5 +194,31 @@ describe('separatedFloatingPoint', () => {
     const result = separatedFloatingPoint.parseStringToCompletion('1_000.2e3');
     assertSuccessfulParse(result);
     expect(result).toBe(1000.2e3);
+  });
+});
+
+describe('signedSeparatedFloatingPoint', () => {
+  test('matches a positive floating point', () => {
+    const result = signedSeparatedFloatingPoint.parseStringToCompletion(
+      '+1_0.23e45'
+    );
+    assertSuccessfulParse(result);
+    expect(result).toBe(10.23e45);
+  });
+
+  test('matches a negative floating point', () => {
+    const result = signedSeparatedFloatingPoint.parseStringToCompletion(
+      '-1_0.23e45'
+    );
+    assertSuccessfulParse(result);
+    expect(result).toBe(-10.23e45);
+  });
+
+  test('matches a floating point without a sign', () => {
+    const result = signedSeparatedFloatingPoint.parseStringToCompletion(
+      '1_0.23e45'
+    );
+    assertSuccessfulParse(result);
+    expect(result).toBe(10.23e45);
   });
 });

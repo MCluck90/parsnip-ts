@@ -22,8 +22,10 @@ export class Parser<T> {
     });
   }
 
-  concat(parser: Parser<string>): Parser<string> {
-    return this.bind((value) => parser.map((other) => value + other));
+  concat(parser: Parser<{ toString(): string }>): Parser<string> {
+    return this.bind((value) =>
+      parser.map((other) => value + other.toString())
+    );
   }
 
   map<U>(map: (t: T) => U): Parser<U> {
