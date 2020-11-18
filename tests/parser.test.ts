@@ -10,6 +10,7 @@ import {
   maybeWithDefault,
   not,
   oneOrMore,
+  pair,
   Parser,
   regexp,
   repeat,
@@ -299,5 +300,24 @@ describe('list', () => {
     const result = parser.parseStringToCompletion(input);
     assertSuccessfulParse(result);
     expect(result).toEqual(['abc', 'abc', 'abc']);
+  });
+});
+
+describe('pair', () => {
+  test('matches two parsers in a row', () => {
+    const result = pair(text('a'), text('b')).parseStringToCompletion('ab');
+    assertSuccessfulParse(result);
+  });
+
+  test('fails if either parser fails', () => {
+    const parser = pair(text('a'), text('b'));
+    assertUnsuccessfulParse(parser.parseStringToCompletion('bb'));
+    assertUnsuccessfulParse(parser.parseStringToCompletion('aa'));
+  });
+
+  test('returns matches as a tuple', () => {
+    const result = pair(text('a'), text('b')).parseStringToCompletion('ab');
+    assertSuccessfulParse(result);
+    expect(result).toEqual(['a', 'b']);
   });
 });

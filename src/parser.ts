@@ -189,3 +189,9 @@ export const list = <T, U>(
       ...rest,
     ])
   );
+
+export const pair = <T, U>(
+  firstParser: Parser<T>,
+  secondParser: Parser<U>
+): Parser<[T, U]> =>
+  firstParser.bind((first) => secondParser.map((second) => [first, second]));
