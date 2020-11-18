@@ -55,6 +55,7 @@ export class Parser<T> {
         result.source.line,
         result.source.column,
         'Incomplete parse',
+        source,
         'end of input',
         result.source.getRemaining()
       );
@@ -70,7 +71,9 @@ export const constant = <T>(value: T): Parser<T> =>
   );
 
 export const error = <T>(message: string): Parser<T> =>
-  new Parser((source) => new ParseError(source.line, source.column, message));
+  new Parser(
+    (source) => new ParseError(source.line, source.column, message, source)
+  );
 
 export const maybe = <T>(parser: Parser<T | null>): Parser<T | null> =>
   parser.or(constant(null));
@@ -103,7 +106,12 @@ export const oneOrMore = <T>(
     const results = [];
     let item = parser.parse(source);
     if (item instanceof ParseError) {
-      return new ParseError(item.line, item.column, message || item.message);
+      return new ParseError(
+        item.line,
+        item.column,
+        message || item.message,
+        source
+      );
     }
 
     source = item.source;
@@ -124,7 +132,7 @@ export const not = <T>(parser: Parser<T>, message?: string): Parser<null> =>
   new Parser((source) => {
     const result = parser.parse(source);
     if (!(result instanceof ParseError)) {
-      return new ParseError(source.line, source.column, message);
+      return new ParseError(source.line, source.column, message, source);
     }
     return new ParseResult(null, source, source.line, source.column);
   });
@@ -140,7 +148,8 @@ export const repeat = <T>(
       return new ParseError(
         source.line,
         source.column,
-        message || result.message
+        message || result.message,
+        source
       );
     }
 
@@ -152,7 +161,8 @@ export const repeat = <T>(
         return new ParseError(
           source.line,
           source.column,
-          message || result.message
+          message || result.message,
+          source
         );
       }
       source = result.source;

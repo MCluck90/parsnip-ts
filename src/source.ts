@@ -48,6 +48,7 @@ export class Source {
       this.line,
       this.column,
       message,
+      this,
       regexp.toString(),
       this.source.substr(this.index, 10)
     );
@@ -65,6 +66,7 @@ export class Source {
       this.line,
       this.column,
       message,
+      this,
       text,
       this.source.substr(this.index, text.length)
     );
