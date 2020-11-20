@@ -21,7 +21,8 @@
     "rebuild:prod": "npm run clean && npm run build:prod",
     "test": "jest --passWithNoTests",
     "test:watch": "npm test -- --watch",
-    "prepublishOnly": "npm run rebuild:prod"
+    "prepublishOnly": "npm run rebuild:prod",
+    "docs": "typedoc src"
   },
   "dependencies": {},
   "devDependencies": {
@@ -40,6 +41,7 @@
     "ts-jest": "^26.4.4",
     "ts-node": "^9.0.0",
     "ts-node-dev": "^1.0.0",
+    "typedoc": "^0.19.2",
     "typescript": "^4.0.5"
   }
 }
