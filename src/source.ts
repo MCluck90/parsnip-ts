@@ -20,10 +20,18 @@ export class Source {
     return { line, column };
   }
 
+  /**
+   * Get the remaining input
+   */
   getRemaining() {
     return this.source.substr(this.index);
   }
 
+  /**
+   * Attempt to match the source against a regular expression
+   * @param regexp Regular expression to match
+   * @param message Error message if it fails
+   */
   match(regexp: RegExp, message?: string): ParseResult<string> | ParseError {
     if (!regexp.sticky) {
       throw new AssertionError({
@@ -54,6 +62,11 @@ export class Source {
     );
   }
 
+  /**
+   * Attempt to match the source against a literal string
+   * @param text Text to match
+   * @param message Error message, if it fails
+   */
   text(text: string, message?: string): ParseResult<string> | ParseError {
     if (this.source.substr(this.index, text.length) === text) {
       const newIndex = this.index + text.length;

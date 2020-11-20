@@ -92,18 +92,18 @@ describe('json', () => {
     const contents = fs
       .readFileSync(path.join(__dirname, '../package.json'))
       .toString();
-    const result = json.parseStringToCompletion(contents);
+    const result = json.parseToEnd(contents);
     assertSuccessfulParse(result);
   });
 
   test('parse a number', () => {
-    const result = json.parseStringToCompletion('123.4e56');
+    const result = json.parseToEnd('123.4e56');
     assertSuccessfulParse(result);
     expect(result).toBe(123.4e56);
   });
 
   test('parse a string', () => {
-    const result = json.parseStringToCompletion('"hello"');
+    const result = json.parseToEnd('"hello"');
     assertSuccessfulParse(result);
     expect(result).toBe('hello');
   });
@@ -116,13 +116,13 @@ describe('json', () => {
         d: [],
       },
     };
-    const result = json.parseStringToCompletion(JSON.stringify(input));
+    const result = json.parseToEnd(JSON.stringify(input));
     assertSuccessfulParse(result);
     expect(result).toEqual(input);
   });
 
   test('parse an array', () => {
-    const result = json.parseStringToCompletion('[1, 2, 3]');
+    const result = json.parseToEnd('[1, 2, 3]');
     assertSuccessfulParse(result);
     expect(result).toEqual([1, 2, 3]);
   });
@@ -131,7 +131,7 @@ describe('json', () => {
     const contents = fs
       .readFileSync(path.join(__dirname, '../package.json'))
       .toString();
-    const result = json.parseStringToCompletion(contents);
+    const result = json.parseToEnd(contents);
     assertSuccessfulParse(result);
     const packageJson = JSON.parse(contents);
     expect(result).toEqual(packageJson);

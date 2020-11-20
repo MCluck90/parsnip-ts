@@ -157,13 +157,13 @@ describe('bind', () => {
 
 describe('concat', () => {
   test('should concatenate two string parsers', () => {
-    const result = text('a').concat(text('b')).parseStringToCompletion('ab');
+    const result = text('a').concat(text('b')).parseToEnd('ab');
     assertSuccessfulParse(result);
     expect(result).toBe('ab');
   });
 
   test('should fail if the parser fails', () => {
-    const result = text('a').concat(text('c')).parseStringToCompletion('ab');
+    const result = text('a').concat(text('c')).parseToEnd('ab');
     assertUnsuccessfulParse(result);
   });
 });
@@ -195,17 +195,17 @@ describe('or', () => {
 
 describe('parseStringToCompletion', () => {
   test('should return an error if parsing fails', () => {
-    const result = regexp(/a/y).parseStringToCompletion('b');
+    const result = regexp(/a/y).parseToEnd('b');
     expect(result).toBeInstanceOf(ParseError);
   });
 
   test('should return an error if parsing does not complete', () => {
-    const result = regexp(/a/y).parseStringToCompletion('aa');
+    const result = regexp(/a/y).parseToEnd('aa');
     expect(result).toBeInstanceOf(ParseError);
   });
 
   test('should return the result if parsing is successful', () => {
-    const result = regexp(/a+/y).parseStringToCompletion('aaa');
+    const result = regexp(/a+/y).parseToEnd('aaa');
     assertSuccessfulParse(result);
     expect(result).toBe('aaa');
   });
@@ -218,7 +218,7 @@ describe('parseStringToCompletion', () => {
   `;
     const line1Parser = regexp(/line1\n/y);
     const parser = line1Parser.and(line1Parser);
-    const result = parser.parseStringToCompletion(input);
+    const result = parser.parseToEnd(input);
     assertUnsuccessfulParse(result);
     expect(result.line).toBe(2);
   });
@@ -226,7 +226,7 @@ describe('parseStringToCompletion', () => {
   test('should return column where error occurred', () => {
     const input = 'abc';
     const parser = regexp(/a/y).and(regexp(/c/y));
-    const result = parser.parseStringToCompletion(input);
+    const result = parser.parseToEnd(input);
     assertUnsuccessfulParse(result);
     expect(result.column).toBe(2);
   });
@@ -255,7 +255,7 @@ describe('not', () => {
 
 describe('repeat', () => {
   test('should repeat a parser a set number of times', () => {
-    const result = repeat(text('a'), 4).parseStringToCompletion('aaaa');
+    const result = repeat(text('a'), 4).parseToEnd('aaaa');
     assertSuccessfulParse(result);
   });
 });
@@ -265,14 +265,14 @@ describe('lazy', () => {
     let innerParser: Parser<string> = error('Failed');
     const parser = lazy(() => innerParser);
     innerParser = text('a');
-    const result = parser.parseStringToCompletion('a');
+    const result = parser.parseToEnd('a');
     assertSuccessfulParse(result);
   });
 });
 
 describe('join', () => {
   test('should join the strings from a parser which returns a string array', () => {
-    const result = join(oneOrMore(text('a'))).parseStringToCompletion('aaaa');
+    const result = join(oneOrMore(text('a'))).parseToEnd('aaaa');
     assertSuccessfulParse(result);
     expect(result).toBe('aaaa');
   });
@@ -280,15 +280,13 @@ describe('join', () => {
 
 describe('list', () => {
   test('matches a list with a single element', () => {
-    const result = list(text('a'), text(',')).parseStringToCompletion('a');
+    const result = list(text('a'), text(',')).parseToEnd('a');
     assertSuccessfulParse(result);
     expect(result).toEqual(['a']);
   });
 
   test('matches a list with multiple elements', () => {
-    const result = list(text('a'), text(',')).parseStringToCompletion(
-      'a,a,a,a,a'
-    );
+    const result = list(text('a'), text(',')).parseToEnd('a,a,a,a,a');
     assertSuccessfulParse(result);
     expect(result).toEqual(['a', 'a', 'a', 'a', 'a']);
   });
@@ -297,7 +295,7 @@ describe('list', () => {
     const separator = text('#START#').and(regexp(/\d{3}/y)).and(text('#END#'));
     const parser = list(text('abc'), separator);
     const input = 'abc#START#123#END#abc#START#456#END#abc';
-    const result = parser.parseStringToCompletion(input);
+    const result = parser.parseToEnd(input);
     assertSuccessfulParse(result);
     expect(result).toEqual(['abc', 'abc', 'abc']);
   });
@@ -305,18 +303,18 @@ describe('list', () => {
 
 describe('pair', () => {
   test('matches two parsers in a row', () => {
-    const result = pair(text('a'), text('b')).parseStringToCompletion('ab');
+    const result = pair(text('a'), text('b')).parseToEnd('ab');
     assertSuccessfulParse(result);
   });
 
   test('fails if either parser fails', () => {
     const parser = pair(text('a'), text('b'));
-    assertUnsuccessfulParse(parser.parseStringToCompletion('bb'));
-    assertUnsuccessfulParse(parser.parseStringToCompletion('aa'));
+    assertUnsuccessfulParse(parser.parseToEnd('bb'));
+    assertUnsuccessfulParse(parser.parseToEnd('aa'));
   });
 
   test('returns matches as a tuple', () => {
-    const result = pair(text('a'), text('b')).parseStringToCompletion('ab');
+    const result = pair(text('a'), text('b')).parseToEnd('ab');
     assertSuccessfulParse(result);
     expect(result).toEqual(['a', 'b']);
   });

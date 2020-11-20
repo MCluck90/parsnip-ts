@@ -1,5 +1,12 @@
 import { regexp } from './parser';
 
+/**
+ * Parse common escape sequences
+ *
+ * ```ts
+ * escapeSequence.parseToEnd('\\n') // '\n'
+ * ```
+ */
 export const escapeSequence = regexp(/\\[bfnrtv0'"\\]/y).map((value) => {
   switch (value) {
     case '\\b':
