@@ -1,6 +1,6 @@
 # 🌱 Parsnip-ts 
 
-Parser combinator written in and for TypeScript.
+Parser combinators written in and for TypeScript.
 
 ## Getting Started
 
