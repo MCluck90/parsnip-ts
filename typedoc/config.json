@@ -1,7 +1,9 @@
 {
   "mode": "modules",
   "out": "docs",
+  "exclude": "src/util/**/*",
   "excludeNotExported": true,
   "excludePrivate": true,
-  "excludeProtected": true
+  "excludeProtected": true,
+  "theme": "typedoc/theme"
 }

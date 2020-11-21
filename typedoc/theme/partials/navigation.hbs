@@ -1,0 +1,29 @@
+{{#if isVisible}}
+  {{#ifCond title '==' '"lib"'}}
+  {{else}}
+    {{#if isLabel}}
+      <li class="label {{cssClasses}}">
+        <span>{{{wbr title}}}</span>
+      </li>
+    {{else}}
+      {{#if isGlobals}}
+        <li class="{{#isLib this}}current{{/isLib}} {{cssClasses}}">
+          <a href="/modules/_lib_.html">&lt;root&gt;</a>
+        </li>
+      {{else}}
+        <li class="{{#if isInPath}}current{{/if}} {{cssClasses}}">
+          <a href="{{relativeURL url}}">{{{removeQuotes title}}}</a>
+          {{#if isInPath}}
+            {{#if children}}
+              <ul>
+                {{#each children}}
+                  {{> navigation}}
+                {{/each}}
+              </ul>
+            {{/if}}
+          {{/if}}
+        </li>
+      {{/if}}
+    {{/if}}
+  {{/ifCond}}
+{{/if}}

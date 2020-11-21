@@ -22,7 +22,8 @@
     "test": "jest --passWithNoTests",
     "test:watch": "npm test -- --watch",
     "prepublishOnly": "npm run rebuild:prod",
-    "docs": "typedoc src"
+    "docs": "typedoc --options typedoc/config.json src",
+    "watch:docs": "nodemon -e js,ts,json,md,hbs,css --ignore docs/ --exec \"npm run docs\""
   },
   "dependencies": {},
   "devDependencies": {
@@ -36,6 +37,7 @@
     "babel-jest": "^26.6.3",
     "eslint": "^7.13.0",
     "jest": "^26.6.3",
+    "nodemon": "^2.0.6",
     "prettier": "^2.1.2",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.4.4",

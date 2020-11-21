@@ -1,0 +1,36 @@
+html,
+body {
+  background-color: #fff;
+  color: #222;
+}
+
+code,
+pre {
+  font-family: 'Jetbrains Mono', 'Fira Code', 'Courier New';
+}
+
+a,
+.tsd-breadcrumb code a,
+.tsd-navigation a {
+  color: #3d7e9a;
+}
+
+.tsd-breadcrumb code,
+.tsd-page-title {
+  background-color: #eee;
+  color: #333;
+  font-size: 35px;
+}
+
+.tsd-panel {
+  box-shadow: none;
+}
+
+.tsd-page-toolbar,
+.tsd-navigation {
+  background-color: #fcfcfc;
+}
+
+footer {
+  background-color: transparent;
+}

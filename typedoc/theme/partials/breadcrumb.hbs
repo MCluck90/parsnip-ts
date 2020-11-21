@@ -1,0 +1,20 @@
+{{#compact}}
+{{#if parent}}
+  {{#ifCond name '==' '"lib"'}}
+    {{#if url}}
+      <code>import &apos;<a href="{{relativeURL url}}">parsnip-ts</a>&apos;</code>
+    {{/if}}
+  {{else}}
+    {{#with parent}}{{> breadcrumb isImported=true }}{{/with}}
+    {{#if url}}
+      /<a href="{{relativeURL url}}">{{removeQuotes name}}</a>&apos;</code>
+    {{else}}
+      /<span>{{removeQuotes name}}</span>&apos;
+    {{/if}}
+  {{/ifCond}}
+{{else}}
+  {{#if url}}
+    <code>import &apos;<a href="{{relativeURL url}}">parsnip-ts</a>{{#unless isImported}}&apos;</code>{{/unless}}
+  {{/if}}
+{{/if}}
+{{/compact}}
