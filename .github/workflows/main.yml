@@ -19,11 +19,11 @@ jobs:
         run: |
           npm ci
           npm run docs
-      - name: Deploy to GitHub Pages
+      - name: Deploy to documentation folder
         if: success()
         uses: crazy-max/ghaction-github-pages@v2
         with:
-          target_branch: gh-pages
+          target_branch: docs
           build_dir: docs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -31,7 +31,7 @@ jobs:
         uses: andstor/copycat-action@v3
         with:
           personal_token: ${{ secrets.PERSONAL_TOKEN }}
-          src_branch: gh-pages
+          src_branch: docs
           src_path: /.
           dst_path: /parsnip-ts/
           dst_owner: MCluck90
