@@ -26,6 +26,21 @@ export const lineComment = (delimiter: string) =>
 export const blockComment = (start: string, end: string) =>
   text(start).concat(regexp(new RegExp(`.*${escapeRegExp(end)}`, 'sy')));
 
+/**
+ * C-style line comment
+ *
+ * ```ts
+ * cStyleLineComment.matches('// some comment') // true
+ * ```
+ */
 export const cStyleLineComment = lineComment('//');
+
+/**
+ * C-style block comment
+ */
 export const cStyleBlockComment = blockComment('/*', '*/');
+
+/**
+ * C-style comment (line and block)
+ */
 export const cStyleComment = cStyleLineComment.or(cStyleBlockComment);

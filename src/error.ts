@@ -1,9 +1,24 @@
 import { Source } from './source';
 import { multiline } from './util/string';
 
+/**
+ * Error returned when a parser fails
+ */
 export class ParseError extends Error {
+  /** Line that the error occurred on */
   public line: number;
+  /** Column that the error occurred on */
   public column: number;
+
+  /**
+   *
+   * @param line Line that the error occurred on
+   * @param column Column that the error occurred on
+   * @param message Message describing error
+   * @param source Source of the error
+   * @param expected What was expected
+   * @param actual What was found
+   */
   constructor(
     line: number,
     column: number,

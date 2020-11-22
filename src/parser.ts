@@ -4,6 +4,10 @@ import { ParseResult, Source } from './source';
 export type ParseFunction<T> = (source: Source) => ParseResult<T> | ParseError;
 
 export class Parser<T> {
+  /**
+   * The core parser which provides functions for combining parsers
+   * @param parse Defines how to parse source
+   */
   constructor(public parse: ParseFunction<T>) {}
 
   /**

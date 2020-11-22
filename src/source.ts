@@ -2,6 +2,13 @@ import { AssertionError } from 'assert';
 import { ParseError } from './error';
 
 export class Source {
+  /**
+   * Source for parsing
+   * @param source Source input
+   * @param index Where in the input to begin parsing
+   * @param line Line which `source[index]` is on
+   * @param column Column which `source[index]` is on
+   */
   constructor(
     public source: string,
     public index: number,
@@ -87,6 +94,13 @@ export class Source {
 }
 
 export class ParseResult<T> {
+  /**
+   * Result of parsing
+   * @param value Value from parsing
+   * @param source Source that value was parsed from
+   * @param line Line at the end of the result
+   * @param column Column at the end of the result
+   */
   constructor(
     public value: T,
     public source: Source,
