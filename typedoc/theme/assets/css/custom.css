@@ -9,10 +9,25 @@ pre {
   font-family: 'Jetbrains Mono', 'Fira Code', 'Courier New';
 }
 
+pre {
+  border-left: solid 5px #34833b;
+}
+
+.container {
+  max-width: unset;
+}
+.container-main {
+  padding-bottom: 2em;
+}
+
+.col-menu {
+  max-width: 20em;
+}
+
 a,
 .tsd-breadcrumb code a,
 .tsd-navigation a {
-  color: #3d7e9a;
+  color: #34833b;
 }
 
 .tsd-breadcrumb code,
@@ -29,6 +44,10 @@ a,
 .tsd-page-toolbar,
 .tsd-navigation {
   background-color: #fcfcfc;
+}
+
+.tsd-navigation {
+  margin: 0;
 }
 
 footer {
