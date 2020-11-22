@@ -8,7 +8,7 @@
     {{else}}
       {{#if isGlobals}}
         <li class="{{#isLib this}}current{{/isLib}} {{cssClasses}}">
-          <a href="/modules/_lib_.html">&lt;root&gt;</a>
+          <a href="{{relativeURL "modules/_lib_.html"}}">&lt;root&gt;</a>
         </li>
       {{else}}
         <li class="{{#if isInPath}}current{{/if}} {{cssClasses}}">
