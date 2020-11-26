@@ -260,6 +260,11 @@ export const zeroOrMore = <T>(parser: Parser<T>): Parser<T[]> =>
     const results = [];
     let item = parser.parse(source);
     while (!(item instanceof ParseError)) {
+      // Avoid infinite loop
+      if (item.source.index === source.index) {
+        break;
+      }
+
       source = item.source;
       results.push(item.value);
       item = parser.parse(source);

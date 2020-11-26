@@ -105,6 +105,12 @@ describe('zeroOrMore', () => {
     assertSuccessfulParse(result);
     expect(result.value).toEqual(['a', 'a', 'a']);
   });
+
+  test('will terminate when matching an optional parser', () => {
+    const result = zeroOrMore(regexp(/\s*/y)).parseToEnd('');
+    assertSuccessfulParse(result);
+    expect(result).toEqual([]);
+  });
 });
 
 describe('oneOrMore', () => {
