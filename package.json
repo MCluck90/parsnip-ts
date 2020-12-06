@@ -18,10 +18,7 @@
     "combinators",
     "typescript"
   ],
-  "main": "dist/lib.js",
-  "files": [
-    "dist"
-  ],
+  "main": "lib.js",
   "scripts": {
     "start": "ts-node src/lib.ts",
     "watch": "ts-node-dev src/lib.ts",
@@ -34,7 +31,7 @@
     "rebuild:prod": "npm run clean && npm run build:prod",
     "test": "jest --passWithNoTests",
     "test:watch": "npm test -- --watch",
-    "prepublishOnly": "npm run rebuild:prod",
+    "pub": "npm run rebuild:prod && ts-node scripts/copy-to-dist.ts && cd dist && npm publish",
     "docs": "typedoc --options typedoc/config.json src",
     "watch:docs": "nodemon -e js,ts,json,md,hbs,css --ignore docs/ --exec \"npm run docs\""
   },
