@@ -1,10 +1,23 @@
 {
   "name": "parsnip-ts",
   "version": "1.0.0",
-  "description": "Parser combinators for TypeScript",
+  "description": "Parser combinators built in, and for, TypeScript",
   "author": "Mike Cluck",
   "license": "MIT",
-  "keywords": [],
+  "homepage": "https://mcluck.tech/parsnip-ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MCluck90/parsnip-ts"
+  },
+  "bugs": {
+    "url": "https://github.com/MCluck90/parsnip-ts/issues"
+  },
+  "keywords": [
+    "parse",
+    "parser",
+    "combinators",
+    "typescript"
+  ],
   "main": "dist/lib.js",
   "files": [
     "dist"
