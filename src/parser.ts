@@ -99,6 +99,14 @@ export class Parser<T> {
   }
 
   /**
+   * Matches a parser but skips the result, returning the result of the previous parser.
+   * @param parser Parser to match then skip the result
+   */
+  skip<U>(parser: Parser<U>): Parser<T> {
+    return this.bind((value) => parser.map(() => value));
+  }
+
+  /**
    * Attempts to parse a string to the end.
    * Fails if the parser does not parse the entire input
    *

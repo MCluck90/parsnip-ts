@@ -199,6 +199,30 @@ describe('or', () => {
   });
 });
 
+describe('skip', () => {
+  test('should return the value of the original parser when it matches', () => {
+    const parser = regexp(/a/y).skip(regexp(/b/y));
+    const result = parser.parse(new Source('ab', 0));
+    assertSuccessfulParse(result);
+    expect(result.value).toBe('a');
+    expect(result.column).toBe(3);
+  });
+
+  test('should fail if the skipped parser does not match', () => {
+    const parser = regexp(/a/y).skip(regexp(/b/y));
+    const result = parser.parse(new Source('ac', 0));
+    assertUnsuccessfulParse(result);
+  });
+
+  test('should be chainable', () => {
+    const parser = regexp(/a/y).skip(regexp(/b/y)).skip(regexp(/c/y));
+    const result = parser.parse(new Source('abc', 0));
+    assertSuccessfulParse(result);
+    expect(result.value).toBe('a');
+    expect(result.column).toBe(4);
+  });
+});
+
 describe('parseStringToCompletion', () => {
   test('should return an error if parsing fails', () => {
     const result = regexp(/a/y).parseToEnd('b');
