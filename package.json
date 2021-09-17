@@ -1,6 +1,6 @@
 {
   "name": "parsnip-ts",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Parser combinators built in, and for, TypeScript",
   "author": "Mike Cluck",
   "license": "MIT",
