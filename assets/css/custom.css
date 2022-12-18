@@ -1,0 +1,55 @@
+html,
+body {
+  background-color: #fff;
+  color: #222;
+}
+
+code,
+pre {
+  font-family: 'Jetbrains Mono', 'Fira Code', 'Courier New';
+}
+
+pre {
+  border-left: solid 5px #34833b;
+}
+
+.container {
+  max-width: unset;
+}
+.container-main {
+  padding-bottom: 2em;
+}
+
+.col-menu {
+  max-width: 20em;
+}
+
+a,
+.tsd-breadcrumb code a,
+.tsd-navigation a {
+  color: #34833b;
+}
+
+.tsd-breadcrumb code,
+.tsd-page-title {
+  background-color: #eee;
+  color: #333;
+  font-size: 35px;
+}
+
+.tsd-panel {
+  box-shadow: none;
+}
+
+.tsd-page-toolbar,
+.tsd-navigation {
+  background-color: #fcfcfc;
+}
+
+.tsd-navigation {
+  margin: 0;
+}
+
+footer {
+  background-color: transparent;
+}

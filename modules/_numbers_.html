@@ -1,0 +1,391 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>
+		parsnip-ts/numbers - Documentation
+	</title>
+	<meta name="description" content="Documentation for parsnip-ts">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<link rel="stylesheet" href="../assets/css/custom.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">parsnip-ts</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<code>import &apos;<a href="../globals.html">parsnip-ts</a>/<a href="_numbers_.html">numbers</a>&apos;</code>
+			</ul>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="_lib_.html">&lt;root&gt;</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="_boolean_.html">boolean</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="_comments_.html">comments</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="_error_.html">error</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="_escape_sequences_.html">escape-sequences</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="_numbers_.html">numbers</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="_parser_.html">parser</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="_seq_.html">seq</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="_source_.html">source</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="_strings_.html">strings</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="_token_.html">token</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="_whitespace_.html">whitespace</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="_numbers_.html#digit" class="tsd-kind-icon">digit</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="_numbers_.html#exponent" class="tsd-kind-icon">exponent</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="_numbers_.html#floatingpoint" class="tsd-kind-icon">floating<wbr>Point</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="_numbers_.html#fraction" class="tsd-kind-icon">fraction</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="_numbers_.html#integer" class="tsd-kind-icon">integer</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="_numbers_.html#separatedfloatingpoint" class="tsd-kind-icon">separated<wbr>Floating<wbr>Point</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="_numbers_.html#separatedinteger" class="tsd-kind-icon">separated<wbr>Integer</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="_numbers_.html#sign" class="tsd-kind-icon">sign</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="_numbers_.html#signedfloatingpoint" class="tsd-kind-icon">signed<wbr>Floating<wbr>Point</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="_numbers_.html#signedinteger" class="tsd-kind-icon">signed<wbr>Integer</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="_numbers_.html#signedseparatedfloatingpoint" class="tsd-kind-icon">signed<wbr>Separated<wbr>Floating<wbr>Point</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="_numbers_.html#signedseparatedinteger" class="tsd-kind-icon">signed<wbr>Separated<wbr>Integer</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<div class="col-8 col-content">
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_numbers_.html#digit" class="tsd-kind-icon">digit</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_numbers_.html#exponent" class="tsd-kind-icon">exponent</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_numbers_.html#floatingpoint" class="tsd-kind-icon">floating<wbr>Point</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_numbers_.html#fraction" class="tsd-kind-icon">fraction</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_numbers_.html#integer" class="tsd-kind-icon">integer</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_numbers_.html#separatedfloatingpoint" class="tsd-kind-icon">separated<wbr>Floating<wbr>Point</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_numbers_.html#separatedinteger" class="tsd-kind-icon">separated<wbr>Integer</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_numbers_.html#sign" class="tsd-kind-icon">sign</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_numbers_.html#signedfloatingpoint" class="tsd-kind-icon">signed<wbr>Floating<wbr>Point</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_numbers_.html#signedinteger" class="tsd-kind-icon">signed<wbr>Integer</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_numbers_.html#signedseparatedfloatingpoint" class="tsd-kind-icon">signed<wbr>Separated<wbr>Floating<wbr>Point</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="_numbers_.html#signedseparatedinteger" class="tsd-kind-icon">signed<wbr>Separated<wbr>Integer</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="digit" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> digit</h3>
+					<div class="tsd-signature tsd-kind-icon">digit<span class="tsd-signature-symbol">:</span> <a href="../classes/_parser_.parser.html" class="tsd-signature-type">Parser</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MCluck90/parsnip-ts/blob/92d7de4/src/numbers.ts#L19">src/numbers.ts:19</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Parse a single digit</p>
+						</div>
+						<pre><code class="language-ts">digit.matches(<span class="hljs-string">&#x27;1&#x27;</span>) <span class="hljs-comment">// true</span></code></pre>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="exponent" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> exponent</h3>
+					<div class="tsd-signature tsd-kind-icon">exponent<span class="tsd-signature-symbol">:</span> <a href="../classes/_parser_.parser.html" class="tsd-signature-type">Parser</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MCluck90/parsnip-ts/blob/92d7de4/src/numbers.ts#L70">src/numbers.ts:70</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Parse an exponent</p>
+						</div>
+						<pre><code class="language-ts">exponent.matches(<span class="hljs-string">&#x27;e123&#x27;</span>) <span class="hljs-comment">// true</span></code></pre>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="floatingpoint" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> floating<wbr>Point</h3>
+					<div class="tsd-signature tsd-kind-icon">floating<wbr>Point<span class="tsd-signature-symbol">:</span> <a href="../classes/_parser_.parser.html" class="tsd-signature-type">Parser</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MCluck90/parsnip-ts/blob/92d7de4/src/numbers.ts#L90">src/numbers.ts:90</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Parse a floating point number</p>
+						</div>
+						<pre><code class="language-ts">floatingPoint.parseToEnd(<span class="hljs-string">&#x27;1.2e3&#x27;</span>) <span class="hljs-comment">// 1200</span></code></pre>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="fraction" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> fraction</h3>
+					<div class="tsd-signature tsd-kind-icon">fraction<span class="tsd-signature-symbol">:</span> <a href="../classes/_parser_.parser.html" class="tsd-signature-type">Parser</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MCluck90/parsnip-ts/blob/92d7de4/src/numbers.ts#L81">src/numbers.ts:81</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Parse a fraction</p>
+						</div>
+						<pre><code class="language-ts">fraction.matches(<span class="hljs-string">&#x27;.123&#x27;</span>) <span class="hljs-comment">// true</span></code></pre>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="integer" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> integer</h3>
+					<div class="tsd-signature tsd-kind-icon">integer<span class="tsd-signature-symbol">:</span> <a href="../classes/_parser_.parser.html" class="tsd-signature-type">Parser</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MCluck90/parsnip-ts/blob/92d7de4/src/numbers.ts#L28">src/numbers.ts:28</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Parse an integer</p>
+						</div>
+						<pre><code class="language-ts">integer.parseToEnd(<span class="hljs-string">&#x27;123&#x27;</span>) <span class="hljs-comment">// 123</span></code></pre>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="separatedfloatingpoint" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> separated<wbr>Floating<wbr>Point</h3>
+					<div class="tsd-signature tsd-kind-icon">separated<wbr>Floating<wbr>Point<span class="tsd-signature-symbol">:</span> <a href="../classes/_parser_.parser.html" class="tsd-signature-type">Parser</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MCluck90/parsnip-ts/blob/92d7de4/src/numbers.ts#L113">src/numbers.ts:113</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Parse a floating point number with optional separators</p>
+						</div>
+						<pre><code class="language-ts">separatedFloatingPoint.parseToEnd(<span class="hljs-string">&#x27;1_000.2e3&#x27;</span>) <span class="hljs-comment">// 1000200</span></code></pre>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="separatedinteger" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> separated<wbr>Integer</h3>
+					<div class="tsd-signature tsd-kind-icon">separated<wbr>Integer<span class="tsd-signature-symbol">:</span> <a href="../classes/_parser_.parser.html" class="tsd-signature-type">Parser</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MCluck90/parsnip-ts/blob/92d7de4/src/numbers.ts#L48">src/numbers.ts:48</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Parse an integer which may be separated with underscores</p>
+						</div>
+						<pre><code class="language-ts">separatedInteger.parseToEnd(<span class="hljs-string">&#x27;1_000&#x27;</span>) <span class="hljs-comment">// 1000</span></code></pre>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="sign" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> sign</h3>
+					<div class="tsd-signature tsd-kind-icon">sign<span class="tsd-signature-symbol">:</span> <a href="../classes/_parser_.parser.html" class="tsd-signature-type">Parser</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MCluck90/parsnip-ts/blob/92d7de4/src/numbers.ts#L10">src/numbers.ts:10</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Parse a numerical sign</p>
+						</div>
+						<pre><code class="language-ts">sign.parseToEnd(<span class="hljs-string">&#x27;+&#x27;</span>) <span class="hljs-comment">// &#x27;+&#x27;</span></code></pre>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="signedfloatingpoint" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> signed<wbr>Floating<wbr>Point</h3>
+					<div class="tsd-signature tsd-kind-icon">signed<wbr>Floating<wbr>Point<span class="tsd-signature-symbol">:</span> <a href="../classes/_parser_.parser.html" class="tsd-signature-type">Parser</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MCluck90/parsnip-ts/blob/92d7de4/src/numbers.ts#L102">src/numbers.ts:102</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Parse a floating point number with an optional sign</p>
+						</div>
+						<pre><code class="language-ts">signedFloatingPoint.parseToEnd(<span class="hljs-string">&#x27;-1.2e3&#x27;</span>) <span class="hljs-comment">// -1200</span></code></pre>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="signedinteger" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> signed<wbr>Integer</h3>
+					<div class="tsd-signature tsd-kind-icon">signed<wbr>Integer<span class="tsd-signature-symbol">:</span> <a href="../classes/_parser_.parser.html" class="tsd-signature-type">Parser</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MCluck90/parsnip-ts/blob/92d7de4/src/numbers.ts#L37">src/numbers.ts:37</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Parse an integer, optionally preceded with a sign</p>
+						</div>
+						<pre><code class="language-ts">signedInteger.parseToEnd(<span class="hljs-string">&#x27;-123&#x27;</span>) <span class="hljs-comment">// -123</span></code></pre>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="signedseparatedfloatingpoint" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> signed<wbr>Separated<wbr>Floating<wbr>Point</h3>
+					<div class="tsd-signature tsd-kind-icon">signed<wbr>Separated<wbr>Floating<wbr>Point<span class="tsd-signature-symbol">:</span> <a href="../classes/_parser_.parser.html" class="tsd-signature-type">Parser</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MCluck90/parsnip-ts/blob/92d7de4/src/numbers.ts#L125">src/numbers.ts:125</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Parse a floating point number with optional sign and separators</p>
+						</div>
+						<pre><code class="language-ts">signedSeparatedFloatingPoint.parseToEnd(<span class="hljs-string">&#x27;-1_000.2e3&#x27;</span>) <span class="hljs-comment">// -1000200</span></code></pre>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="signedseparatedinteger" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> signed<wbr>Separated<wbr>Integer</h3>
+					<div class="tsd-signature tsd-kind-icon">signed<wbr>Separated<wbr>Integer<span class="tsd-signature-symbol">:</span> <a href="../classes/_parser_.parser.html" class="tsd-signature-type">Parser</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/MCluck90/parsnip-ts/blob/92d7de4/src/numbers.ts#L59">src/numbers.ts:59</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Parse an integer with an optional sign and separators</p>
+						</div>
+						<pre><code class="language-ts">signedSeparatedInteger.parseToEnd(<span class="hljs-string">&#x27;-1_000&#x27;</span>) <span class="hljs-comment">// -1000</span></code></pre>
+					</div>
+				</section>
+			</section>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
