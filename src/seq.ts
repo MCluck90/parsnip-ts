@@ -60,11 +60,14 @@ export function seq<T1, T2, T3, T4, T5, T6, T7, T8>(
  * @param parsers Array of parsers to match
  */
 export function seq(parsers: Parser<unknown>[]): Parser<unknown> {
-  let parser = pair(parsers[0], parsers[1]);
+  let parser: Parser<unknown[]> = pair(parsers[0], parsers[1]);
 
   for (let i = 2; i < parsers.length; i++) {
-    parser = pair(parser, parsers[i]);
+    parser = pair(parser, parsers[i]).map(([previousSet, next]) => [
+      ...previousSet,
+      next,
+    ]);
   }
 
-  return parser.map((result) => result.flat(parsers.length));
+  return parser;
 }

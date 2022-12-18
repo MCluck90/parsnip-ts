@@ -1,6 +1,7 @@
 import { boolean } from '../src/boolean';
 import { ParseError } from '../src/error';
 import { integer } from '../src/numbers';
+import { oneOrMore, text, zeroOrMore } from '../src/parser';
 import { seq } from '../src/seq';
 import { whitespace } from '../src/whitespace';
 import { assertSuccessfulParse } from './util';
@@ -96,5 +97,16 @@ describe('seq', () => {
     ]).parseToEnd('1true 2false 3true');
     assertSuccessfulParse(result);
     expect(result).toEqual([1, true, ' ', 2, false, ' ', 3, true]);
+  });
+
+  test('allows mixing in array results', () => {
+    const result = seq([
+      integer,
+      oneOrMore(text('x')),
+      integer,
+      zeroOrMore(text('y')),
+    ]).parseToEnd('1xxx2y');
+    assertSuccessfulParse(result);
+    expect(result).toEqual([1, ['x', 'x', 'x'], 2, ['y']]);
   });
 });
